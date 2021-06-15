@@ -1,4 +1,4 @@
-package com.vicente.com.br.bookstoremanager.dto;
+package com.vicente.bookstoremanager.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +7,5 @@ import lombok.Data;
 @Builder
 public class MessageResponseDTO {
 
-	private String message;
-	
-	
+    private String message;
 }
