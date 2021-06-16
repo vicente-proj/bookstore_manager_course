@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.vicente.bookstoremanager.dto.BookDTO;
 import com.vicente.bookstoremanager.dto.MessageResponseDTO;
 import com.vicente.bookstoremanager.entity.Book;
+import com.vicente.bookstoremanager.exception.BookNotFoundException;
 import com.vicente.bookstoremanager.mapper.BookMapper;
 import com.vicente.bookstoremanager.repository.BookRepository;
 
@@ -33,9 +34,13 @@ public class BookService {
                 .build();
     }
     
-    public BookDTO findById(Long id) {
-    	Optional<Book> bookOptional =  bookRepository.findById(id);
-    	return bookMapper.toDTO(bookOptional.get());
+    public BookDTO findById(Long id) throws BookNotFoundException {
+    	/*Optional<Book> bookOptional =  bookRepository.findById(id);
+    	return bookMapper.toDTO(bookOptional.get());*/
+    	
+    	Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
+    	
+    	return bookMapper.toDTO(book);
     }
 
 }
